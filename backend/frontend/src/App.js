@@ -6,6 +6,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
+import axios from 'axios';
+
 
 
 class App extends Component {
@@ -19,6 +21,18 @@ class App extends Component {
 	};
   }
   	
+
+	enviarDadosParaBackend() {
+		axios.get('/filter')
+		.then(function (response) {
+			console.log('Dados recebidos com sucesso:', response.data);
+		// Faça algo com os dados recebidos, por exemplo, atualize o estado do componente
+		})
+		.catch(function (error) {
+			console.error('Erro ao buscar dados:', error);
+		});
+	}
+
 
 	render() {
 		const roles = [
@@ -46,11 +60,11 @@ class App extends Component {
 								user_preference_music: event.target.value 
 							})}
 						>
-							<MenuItem value={10}>Eletronic</MenuItem>
-							<MenuItem value={20}>Pagode</MenuItem>
-							<MenuItem value={30}>Samba</MenuItem>
-							<MenuItem value={30}>Rock</MenuItem>
-							<MenuItem value={30}>Sertanejo</MenuItem>
+							<MenuItem value={'Eletronic'}>Eletronic</MenuItem>
+							<MenuItem value={'Pagode'}>Pagode</MenuItem>
+							<MenuItem value={'Samba'}>Samba</MenuItem>
+							<MenuItem value={'Rock'}>Rock</MenuItem>
+							<MenuItem value={'Sertanejo'}>Sertanejo</MenuItem>
 						</Select>
 					</FormControl>
 				</Box>
@@ -66,11 +80,11 @@ class App extends Component {
 								user_preference_drink: event.target.value 
 							})}
 						>
-							<MenuItem value={10}>Open Bar</MenuItem>
-							<MenuItem value={20}>Cerveja</MenuItem>
-							<MenuItem value={30}>Vodka</MenuItem>
-							<MenuItem value={30}>Soda</MenuItem>
-							<MenuItem value={30}>Juice</MenuItem>
+							<MenuItem value={'Open Bar<'}>Open Bar</MenuItem>
+							<MenuItem value={'Cerveja'}>Cerveja</MenuItem>
+							<MenuItem value={'Vodka'}>Vodka</MenuItem>
+							<MenuItem value={'Soda'}>Soda</MenuItem>
+							<MenuItem value={'Juice'}>Juice</MenuItem>
 						</Select>
 					</FormControl>
 				</Box>
@@ -86,9 +100,9 @@ class App extends Component {
 								user_preference_hour: event.target.value 
 							})}
 						>
-							<MenuItem value={10}>Afternoon</MenuItem>
-							<MenuItem value={20}>Night</MenuItem>
-							<MenuItem value={30}>Mid Night</MenuItem>
+							<MenuItem value={'Afternoon'}>Afternoon</MenuItem>
+							<MenuItem value={'Night'}>Night</MenuItem>
+							<MenuItem value={'Mid Night'}>Mid Night</MenuItem>
 						</Select>
 					</FormControl>
 				</Box>
@@ -104,10 +118,10 @@ class App extends Component {
 								user_preference_price: event.target.value 
 							})}
 						>
-							<MenuItem value={10}>20 - 50</MenuItem>
-							<MenuItem value={20}>50 - 100</MenuItem>
-							<MenuItem value={30}>100 - 200</MenuItem>
-							<MenuItem value={30}>200 +</MenuItem>
+							<MenuItem value={'20 - 50'}>20 - 50</MenuItem>
+							<MenuItem value={'50 - 100'}>50 - 100</MenuItem>
+							<MenuItem value={'100 - 200'}>100 - 200</MenuItem>
+							<MenuItem value={'200 +'}>200 +</MenuItem>
 						</Select>
 					</FormControl>
 				</Box>
@@ -115,7 +129,7 @@ class App extends Component {
 				<Button
 					variant="contained"
 					onClick={() => {
-						alert('clicked');
+						this.enviarDadosParaBackend()
 					}}
 					style={{width: '200px'}}
 				>
