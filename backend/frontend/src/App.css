@@ -1,0 +1,22 @@
+.home-container{
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+}
+
+.party-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.party-title{
+  font-size: large;
+  font-family: 'Courier New', Courier, monospace;
+
+}
+
+.save-button{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
