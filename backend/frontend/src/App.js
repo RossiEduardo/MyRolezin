@@ -9,7 +9,6 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -18,31 +17,40 @@ class App extends Component {
 		user_preference_drink: '',
 		user_preference_hour: '',
 		user_preference_price: '',
+		roles: []
 	};
   }
+  
+	// const [rolesTest, setRoles] =  useState({})
+	// const [count, setCount] = useState(0);
   	
 
 	enviarDadosParaBackend() {
-		axios.get('/filter')
-		.then(function (response) {
+		const params = {
+			music: this.state.user_preference_music,
+			drink: this.state.user_preference_drink,
+			hour: this.state.user_preference_hour,
+			price: this.state.user_preference_price	
+		  };
+
+		  axios.get('http://127.0.0.1:8000/filter', { params })
+		  .then((response) => {
 			console.log('Dados recebidos com sucesso:', response.data);
-		// Faça algo com os dados recebidos, por exemplo, atualize o estado do componente
-		})
-		.catch(function (error) {
+			this.setState({ roles: response.data });
+			// setRoles(response.data)
+			// return response.data
+			// Faça algo com os dados recebidos, por exemplo, atualize o estado do componente
+		  })
+		  .catch((error) => {
 			console.error('Erro ao buscar dados:', error);
-		});
+		  });
 	}
 
 
 	render() {
-		const roles = [
-			{nome: 'tusca', value: 80},
-			{nome: 'oktoberim',value: 50},
-			{nome:'ies',value: 70},
-			{nome:'show do thiaginho', value:75},
-			{nome:'bailao', value: 65},
-		]
-		console.log(this.state.user_preference_drink)
+		let roles = this.state.roles
+		console.log('rolezin: ' + roles)
+		
 
 		return (
 			<div className="home-container">
@@ -129,7 +137,7 @@ class App extends Component {
 				<Button
 					variant="contained"
 					onClick={() => {
-						this.enviarDadosParaBackend()
+						roles = this.enviarDadosParaBackend()
 					}}
 					style={{width: '200px'}}
 				>
@@ -140,13 +148,12 @@ class App extends Component {
 				<h2> Your 'Rolezinsss': </h2>
 				{roles.map((item, index) => (
 					<div className="party-container" key={index}>
-						
-						{item.value >= 60 && 
+						{item.score >= 0.1 && 
 							<React.Fragment>
-								<div className="party-title"> <h3> {item.nome} </h3> </div>
+								<div className="party-title"> <h3> {item.name} </h3> </div>
 								<div className="party-img"></div>
-								<div className="party-description">ekodeokfoekofkeofoefeofkeok</div>
-								<div className="party-relevant">{item.value}%</div>
+								<div className="party-description">{item.description}</div>
+								<div className="party-relevant"><h4>My Score:</h4>{item.score}%</div>
 							</React.Fragment>
 						}
 					</div>

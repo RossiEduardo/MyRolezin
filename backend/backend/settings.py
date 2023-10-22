@@ -57,6 +57,11 @@ CORS_ORIGIN_WHITELIST = [
      'http://localhost:3000'
 ]
 
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Substitua pela URL do seu aplicativo React
+]
+
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [

@@ -23,8 +23,7 @@ router = routers.DefaultRouter()
 router.register(r'myrolezins', views.MyRolezinView, 'myrolezin')
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
-    path('filter/', views.filter, name='filter')
-    
+    path('admin', admin.site.urls),
+    path('api', include(router.urls)),
+    path('filter', views.filter, name='filter'),
 ]
